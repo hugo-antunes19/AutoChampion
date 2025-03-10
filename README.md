@@ -11,11 +11,15 @@ O executável possui cerca de 100MB, mas pretendo otimizar essa questão. O cód
   
 ---
 
-### **Requisitos**
+### **Como baixar**
 **Para rodar este projeto, você precisa:**
 - **Clonar** esse repositório
 - Clicar duas vezes (como se estivesse abrindo o Google ou executando um arquivo) no arquivo "install.bat"
 - O arquivo de instalação instalará Python (caso você não o possua), bibliotecas simples e criará o executável para rodar AutoChampion
 - O executável "AutoChampion.exe" estará numa pasta chamada "dist"
 - Basta executar o AutoChampion.exe
-- Bibliotecas Python necessárias: Numpy, OpenCV, PyAutoGUI
+- Bibliotecas Python necessárias: Numpy, OpenCV, PyAutoGUI (estão disponíveis nos requirements.txt)
+
+---
+  
+### **Como utilizar o AutoChampion**
