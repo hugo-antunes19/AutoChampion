@@ -246,7 +246,7 @@ root.iconbitmap(resource_path('assets/images/icon.ico'))
 root.geometry("300x350")
 
 # Advice
-advice_label = tk.Label(root, text="Digite as iniciais \nou selecione o campeão no menu acima.", font=("Arial", 10))
+advice_label = tk.Label(root, text="Desenvolvido por vasco #dagam", font=("Arial", 10))
 advice_label.pack()
 
 # Ban button
@@ -277,12 +277,6 @@ champion_menu.bind('<KeyRelease>', filter_champions)
 update_button = tk.Button(root, text="Atualizar Campeão", command=update_champion)
 update_button.pack()
 
-start_button = tk.Button(root, text="Iniciar", command=start)
-start_button.pack()
-
-stop_button = tk.Button(root, text="Parar", command=stop)
-stop_button.pack()
-
 # Flag Runa
 runa_var = tk.IntVar()  # Variável para armazenar o estado (0 ou 1)
 runa_check = tk.Checkbutton(root, text="Runas Automáticas", variable=runa_var)
@@ -297,6 +291,12 @@ Banimento_check.pack()
 aceitar_var = tk.IntVar()  # Variável para armazenar o estado (0 ou 1)
 aceitar_check = tk.Checkbutton(root, text="APENAS aceitar partida", variable=aceitar_var)
 aceitar_check.pack()
+
+start_button = tk.Button(root, text="Iniciar", command=start, width=10, height=2, font=("Arial",12), bg="#57B9FF")
+start_button.pack()
+
+stop_button = tk.Button(root, text="Parar", command=stop, width=10, height=2, font=("Arial",12), bg="#FA5053")
+stop_button.pack()
 
 root.protocol("WM_DELETE_WINDOW", on_closing)
 

@@ -25,7 +25,7 @@ if %errorlevel% neq 0 (
 echo Instalando dependencias listadas no requirements.txt...
 pip install -r requirements.txt
 
-python -m PyInstaller --onefile --add-data "assets;assets" "AutoChampion.py"
+python -m PyInstaller --onefile --add-data "assets;assets" --icon="assets/images/icon.ico" "AutoChampion.py"
 
 echo Instalacao concluida!
 pause
