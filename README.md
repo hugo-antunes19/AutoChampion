@@ -24,5 +24,5 @@ O executável possui cerca de 100MB, mas pretendo otimizar essa questão. O cód
   
 ### **Como utilizar o AutoChampion**
 <div align="center">
-    <img src="interface.png" alt="Interface do AutoChampion" width="400">
+    <img src="interface.png" alt="Interface do AutoChampion" width="200">
 </div>
