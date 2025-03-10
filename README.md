@@ -1,4 +1,4 @@
-# **[AutoChampion Select - League of Legends (PT-BR)]**
+# **AutoChampion Select - League of Legends (PT-BR)**
 
 ### **Descrição**
 Este projeto é uma aplicação desenvolvida em Python que realiza **a seleção automática do seu campeão, runa e banimento em League of Legends**, fiz uma aplicação utilizando opencv, e uma interface simples. A ideia é para evitar perder filas e atrapalhar os jogos de outras pessoas. É possível selecionar qualquer campeão para banimento e qualquer campeão para jogar.
