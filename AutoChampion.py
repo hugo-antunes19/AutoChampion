@@ -19,113 +19,92 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 def aceitarPartida():
-    global running
     image_to_detect = cv2.imread(resource_path('assets/images/accept.png'), cv2.IMREAD_GRAYSCALE)
-    while running:
-        screen = pyautogui.screenshot()
-        screen_np = np.array(screen)
-        screen_gray = cv2.cvtColor(screen_np, cv2.COLOR_BGR2GRAY)
-        result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
-        loc = np.where(result >= threshold)
-        if len(loc[0]) > 0:
-            print("Partida aceita!")
-            x, y = loc[::-1][0][0], loc[::-1][1][0]
-            pyautogui.moveTo(x + (image_to_detect.shape[1] // 2), y + (image_to_detect.shape[0] // 2),duration=1)
-            pyautogui.click()
-            time.sleep(2)
-            break
-        time.sleep(1)
+    screen = pyautogui.screenshot()
+    screen_np = np.array(screen)
+    screen_gray = cv2.cvtColor(screen_np, cv2.COLOR_BGR2GRAY)
+    result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
+    loc = np.where(result >= threshold)
+    if len(loc[0]) > 0:
+        print("Partida aceita!")
+        x, y = loc[::-1][0][0], loc[::-1][1][0]
+        pyautogui.moveTo(x + (image_to_detect.shape[1] // 2), y + (image_to_detect.shape[0] // 2),duration=1)
+        pyautogui.click()
+        time.sleep(2)
 
 def buscarChampion():
-    global running, champion
+    global champion
     buscarImage = cv2.imread(resource_path('assets\\images\\buscar.png'), cv2.IMREAD_GRAYSCALE)
-    while running:
-        screen = pyautogui.screenshot()
-        screen_np = np.array(screen)
-        screen_gray = cv2.cvtColor(screen_np, cv2.COLOR_BGR2GRAY)
-        resultBuscar = cv2.matchTemplate(screen_gray, buscarImage, cv2.TM_CCOEFF_NORMED)
-        locBuscar = np.where(resultBuscar >= threshold)
-        if len(locBuscar[0]) > 0:
-            x, y = locBuscar[::-1][0][0], locBuscar[::-1][1][0]
-            pyautogui.moveTo(x + (buscarImage.shape[1] // 2), y + (buscarImage.shape[0] // 2),duration=1)
-            pyautogui.click()
-            time.sleep(1)
-            pyautogui.typewrite(str(champion))
-            time.sleep(2)
-            break
+    screen = pyautogui.screenshot()
+    screen_np = np.array(screen)
+    screen_gray = cv2.cvtColor(screen_np, cv2.COLOR_BGR2GRAY)
+    resultBuscar = cv2.matchTemplate(screen_gray, buscarImage, cv2.TM_CCOEFF_NORMED)
+    locBuscar = np.where(resultBuscar >= threshold)
+    if len(locBuscar[0]) > 0:
+        x, y = locBuscar[::-1][0][0], locBuscar[::-1][1][0]
+        pyautogui.moveTo(x + (buscarImage.shape[1] // 2), y + (buscarImage.shape[0] // 2),duration=1)
+        pyautogui.click()
+        time.sleep(1)
+        pyautogui.typewrite(str(champion))
         time.sleep(2)
 
 def selecionarChampion():
-    global running
     championImage = cv2.imread(resource_path(f'assets/images/champions/{champion}.png'), cv2.IMREAD_GRAYSCALE)
-    while running:
-        screen = pyautogui.screenshot()
-        screen_np = np.array(screen)
-        screen_gray = cv2.cvtColor(screen_np, cv2.COLOR_BGR2GRAY)
-        resultChampion = cv2.matchTemplate(screen_gray, championImage, cv2.TM_CCOEFF_NORMED)
-        locChampion = np.where(resultChampion >= threshold)
-        if len(locChampion[0]) > 0:
-            print("Campeão Selecionado")
-            x, y = locChampion[::-1][0][0], locChampion[::-1][1][0]
-            pyautogui.moveTo(x + (championImage.shape[1] // 2), y + (championImage.shape[0] // 2),duration=1)
-            pyautogui.click()
-            time.sleep(2)
-            break
+    screen = pyautogui.screenshot()
+    screen_np = np.array(screen)
+    screen_gray = cv2.cvtColor(screen_np, cv2.COLOR_BGR2GRAY)
+    resultChampion = cv2.matchTemplate(screen_gray, championImage, cv2.TM_CCOEFF_NORMED)
+    locChampion = np.where(resultChampion >= threshold)
+    if len(locChampion[0]) > 0:
+        print("Campeão Selecionado")
+        x, y = locChampion[::-1][0][0], locChampion[::-1][1][0]
+        pyautogui.moveTo(x + (championImage.shape[1] // 2), y + (championImage.shape[0] // 2),duration=1)
+        pyautogui.click()
         time.sleep(2)
 
 def runa():
     global running
     image_to_detect = cv2.imread(resource_path('assets/images/runa.png'), cv2.IMREAD_GRAYSCALE)
-    while running:
-        screen = pyautogui.screenshot()
-        screen_np = np.array(screen)
-        screen_gray = cv2.cvtColor(screen_np, cv2.COLOR_BGR2GRAY)
-        result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
-        loc = np.where(result >= threshold)
-        if len(loc[0]) > 0:
-            print("Runa Confirmada!")
-            x, y = loc[::-1][0][0], loc[::-1][1][0]
-            pyautogui.moveTo(x + (image_to_detect.shape[1] // 2), y + (image_to_detect.shape[0] // 2),duration=1)
-            pyautogui.click()
-            pyautogui.moveTo(x + 400, y - 200,duration=1)
-            pyautogui.click()
-            time.sleep(2)
-            break
+    screen = pyautogui.screenshot()
+    screen_np = np.array(screen)
+    screen_gray = cv2.cvtColor(screen_np, cv2.COLOR_BGR2GRAY)
+    result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
+    loc = np.where(result >= threshold)
+    if len(loc[0]) > 0:
+        print("Runa Confirmada!")
+        x, y = loc[::-1][0][0], loc[::-1][1][0]
+        pyautogui.moveTo(x + (image_to_detect.shape[1] // 2), y + (image_to_detect.shape[0] // 2),duration=1)
+        pyautogui.click()
+        pyautogui.moveTo(x + 400, y - 200,duration=1)
+        pyautogui.click()
         time.sleep(2)
     
 def fechar():
     global running
     image_to_detect = cv2.imread(resource_path('assets/images/fechar.png'), cv2.IMREAD_GRAYSCALE)
-    while running:
-        screen = pyautogui.screenshot()
-        screen_np = np.array(screen)
-        screen_gray = cv2.cvtColor(screen_np, cv2.COLOR_BGR2GRAY)
-        result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
-        loc = np.where(result >= threshold)
-        if len(loc[0]) > 0:
-            x, y = loc[::-1][0][0], loc[::-1][1][0]
-            pyautogui.moveTo(x + (image_to_detect.shape[1] // 2), y + (image_to_detect.shape[0] // 2),duration=1)
-            pyautogui.click()
-            time.sleep(2)
-            break
+    screen = pyautogui.screenshot()
+    screen_np = np.array(screen)
+    screen_gray = cv2.cvtColor(screen_np, cv2.COLOR_BGR2GRAY)
+    result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
+    loc = np.where(result >= threshold)
+    if len(loc[0]) > 0:
+        x, y = loc[::-1][0][0], loc[::-1][1][0]
+        pyautogui.moveTo(x + (image_to_detect.shape[1] // 2), y + (image_to_detect.shape[0] // 2),duration=1)
+        pyautogui.click()
         time.sleep(2)
 
 def confirmar():
-    global running
     image_to_detect = cv2.imread(resource_path('assets/images/confirm.png'), cv2.IMREAD_GRAYSCALE)
-    while running:
-        screen = pyautogui.screenshot()
-        screen_np = np.array(screen)
-        screen_gray = cv2.cvtColor(screen_np, cv2.COLOR_BGR2GRAY)
-        result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
-        loc = np.where(result >= threshold)
-        if len(loc[0]) > 0:
-            print("Partida Confirmada!")
-            x, y = loc[::-1][0][0], loc[::-1][1][0]
-            pyautogui.moveTo(x + (image_to_detect.shape[1] // 2), y + (image_to_detect.shape[0] // 2),duration=1)
-            pyautogui.click()
-            time.sleep(2)
-            break
+    screen = pyautogui.screenshot()
+    screen_np = np.array(screen)
+    screen_gray = cv2.cvtColor(screen_np, cv2.COLOR_BGR2GRAY)
+    result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
+    loc = np.where(result >= threshold)
+    if len(loc[0]) > 0:
+        print("Partida Confirmada!")
+        x, y = loc[::-1][0][0], loc[::-1][1][0]
+        pyautogui.moveTo(x + (image_to_detect.shape[1] // 2), y + (image_to_detect.shape[0] // 2),duration=1)
+        pyautogui.click()
         time.sleep(2)
 
 def checkBan():
@@ -144,76 +123,83 @@ def checkBan():
 def buscarBan():
     global running
     image_to_detect = cv2.imread(resource_path('assets/images/buscarBanir.png'), cv2.IMREAD_GRAYSCALE)
-    while running:
-        screen = pyautogui.screenshot()
-        screen_np = np.array(screen)
-        screen_gray = cv2.cvtColor(screen_np, cv2.COLOR_BGR2GRAY)
-        result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
-        loc = np.where(result >= threshold)
-        if len(loc[0]) > 0:
-            print("Buscando banimento")
-            x, y = loc[::-1][0][0], loc[::-1][1][0]
-            pyautogui.moveTo(x + (image_to_detect.shape[1] // 2), y + (image_to_detect.shape[0] // 2),duration=1)
-            pyautogui.click()
-            time.sleep(1)
-            pyautogui.typewrite(str(ban))
-            time.sleep(2)
-            break
+    screen = pyautogui.screenshot()
+    screen_np = np.array(screen)
+    screen_gray = cv2.cvtColor(screen_np, cv2.COLOR_BGR2GRAY)
+    result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
+    loc = np.where(result >= threshold)
+    if len(loc[0]) > 0:
+        print("Buscando banimento")
+        x, y = loc[::-1][0][0], loc[::-1][1][0]
+        pyautogui.moveTo(x + (image_to_detect.shape[1] // 2), y + (image_to_detect.shape[0] // 2),duration=1)
+        pyautogui.click()
+        time.sleep(1)
+        pyautogui.typewrite(str(ban))
         time.sleep(2)
 
 def banirChampion():
     global running
     banImage = cv2.imread(resource_path(f'assets/images/champions/{ban}.png'), cv2.IMREAD_GRAYSCALE)
-    while running:
-        screen = pyautogui.screenshot()
-        screen_np = np.array(screen)
-        screen_gray = cv2.cvtColor(screen_np, cv2.COLOR_BGR2GRAY)
-        resultChampion = cv2.matchTemplate(screen_gray, banImage, cv2.TM_CCOEFF_NORMED)
-        locChampion = np.where(resultChampion >= threshold)
-        if len(locChampion[0]) > 0:
-            print("Banimento Selecionado")
-            x, y = locChampion[::-1][0][0], locChampion[::-1][1][0]
-            pyautogui.moveTo(x + (banImage.shape[1] // 2), y + (banImage.shape[0] // 2),duration=1)
-            pyautogui.click()
-            time.sleep(2)
-            break
+    screen = pyautogui.screenshot()
+    screen_np = np.array(screen)
+    screen_gray = cv2.cvtColor(screen_np, cv2.COLOR_BGR2GRAY)
+    resultChampion = cv2.matchTemplate(screen_gray, banImage, cv2.TM_CCOEFF_NORMED)
+    locChampion = np.where(resultChampion >= threshold)
+    if len(locChampion[0]) > 0:
+        print("Banimento Selecionado")
+        x, y = locChampion[::-1][0][0], locChampion[::-1][1][0]
+        pyautogui.moveTo(x + (banImage.shape[1] // 2), y + (banImage.shape[0] // 2),duration=1)
+        pyautogui.click()
         time.sleep(2)
 
 def banir():
     global running
     image_to_detect = cv2.imread(resource_path('assets/images/banir.png'), cv2.IMREAD_GRAYSCALE)
-    while running:
-        screen = pyautogui.screenshot()
-        screen_np = np.array(screen)
-        screen_gray = cv2.cvtColor(screen_np, cv2.COLOR_BGR2GRAY)
-        result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
-        loc = np.where(result >= threshold)
-        if len(loc[0]) > 0:
-            print("Banimento confirmado")
-            x, y = loc[::-1][0][0], loc[::-1][1][0]
-            pyautogui.moveTo(x + (image_to_detect.shape[1] // 2), y + (image_to_detect.shape[0] // 2),duration=1)
-            pyautogui.click()
-            time.sleep(2)
-            break
+    screen = pyautogui.screenshot()
+    screen_np = np.array(screen)
+    screen_gray = cv2.cvtColor(screen_np, cv2.COLOR_BGR2GRAY)
+    result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
+    loc = np.where(result >= threshold)
+    if len(loc[0]) > 0:
+        print("Banimento confirmado")
+        x, y = loc[::-1][0][0], loc[::-1][1][0]
+        pyautogui.moveTo(x + (image_to_detect.shape[1] // 2), y + (image_to_detect.shape[0] // 2),duration=1)
+        pyautogui.click()
         time.sleep(2)
 
 def main_loop():
     while running:
-        if aceitar_var.get(): aceitarPartida()
+        screen = pyautogui.screenshot()
+        screen_np = np.array(screen)
+        screen_gray = cv2.cvtColor(screen_np, cv2.COLOR_BGR2GRAY)
+        if aceitar_var.get(): 
+            image_to_detect = cv2.imread(resource_path('assets/images/confirm.png'), cv2.IMREAD_GRAYSCALE)
+            result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
+            loc = np.where(result >= threshold)
+            if len(loc[0]) > 0: aceitarPartida()
         else:
-            aceitarPartida()
-            if Banimento_var.get():
-                checkBan()
+            if aceitar_var.get(): 
+                image_to_detect = cv2.imread(resource_path('assets/images/confirm.png'), cv2.IMREAD_GRAYSCALE)
+                result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
+                loc = np.where(result >= threshold)
+                if len(loc[0]) > 0: aceitarPartida()
+            image_to_detect = cv2.imread(resource_path('assets/images/banFlag.png'), cv2.IMREAD_GRAYSCALE)
+            result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
+            loc = np.where(result >= threshold)
+            if Banimento_var.get() and len(loc[0]) > 0:
                 buscarBan()
                 banirChampion()
                 banir()
-            else:
-                time.sleep(45)
-            buscarChampion()
-            selecionarChampion()
+            image_to_detect = cv2.imread(resource_path('assets/images/selecioneChampion.png'), cv2.IMREAD_GRAYSCALE)
+            result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
+            loc = np.where(result >= threshold)
+            if len(loc[0]) > 0:
+                buscarChampion()
+                selecionarChampion()
             if runa_var.get(): runa()
             fechar()
             confirmar()
+        time.sleep(1)
 
 def start():
     global running
@@ -263,7 +249,7 @@ def filter_bans(event):
 root = tk.Tk()
 root.title("AutoSelect Champion")
 root.iconbitmap(resource_path('assets/images/icon.ico'))
-root.geometry("300x350")
+root.geometry("400x450")
 
 # Advice
 advice_label = tk.Label(root, text="Desenvolvido por vasco #dagam", font=("Arial", 10))
@@ -304,7 +290,7 @@ runa_check.pack()
 
 # Flag Banimento
 Banimento_var = tk.IntVar()  # Variável para armazenar o estado (0 ou 1)
-Banimento_check = tk.Checkbutton(root, text="Banimenmto Automático", variable=Banimento_var)
+Banimento_check = tk.Checkbutton(root, text="Banimento Automático", variable=Banimento_var)
 Banimento_check.pack()
 
 # Flag apenas aceitar partida
