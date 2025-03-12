@@ -33,4 +33,4 @@ O executável possui cerca de 100MB, mas pretendo otimizar essa questão. O cód
 - Quer runas automáticas? Selecione a caixa
 - Quer banimento automático? Selecione a caixa
 - Quer APENAS que o AutoChampion aceite suas partidas, ou seja, sem selecionar banimento e campeão? Selecione a caixa
-- Por fim, clique em **Iniciar**
+- Por fim, clique em Iniciar
