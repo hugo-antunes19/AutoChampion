@@ -11,6 +11,7 @@ import os
 threshold = 0.8
 champion = "Lee sin"
 running = False
+my_thread = None
 
 def resource_path(relative_path):
     """ Obtenha o caminho absoluto para o recurso, lidando com pacotes PyInstaller. """
@@ -127,6 +128,19 @@ def confirmar():
             break
         time.sleep(2)
 
+def checkBan():
+    global running
+    image_to_detect = cv2.imread(resource_path('assets/images/banFlag.png'), cv2.IMREAD_GRAYSCALE)
+    while running:
+        screen = pyautogui.screenshot()
+        screen_np = np.array(screen)
+        screen_gray = cv2.cvtColor(screen_np, cv2.COLOR_BGR2GRAY)
+        result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
+        loc = np.where(result >= threshold)
+        if len(loc[0]) > 0:
+            break
+        time.sleep(2)
+
 def buscarBan():
     global running
     image_to_detect = cv2.imread(resource_path('assets/images/buscarBanir.png'), cv2.IMREAD_GRAYSCALE)
@@ -189,6 +203,7 @@ def main_loop():
         else:
             aceitarPartida()
             if Banimento_var.get():
+                checkBan()
                 buscarBan()
                 banirChampion()
                 banir()
@@ -202,8 +217,13 @@ def main_loop():
 
 def start():
     global running
+    global my_thread
     running = True
-    threading.Thread(target=main_loop).start()
+    if my_thread is None or not my_thread.is_alive():
+        my_thread = threading.Thread(target=main_loop)
+        my_thread.start()
+        print("Criando nova Threading")
+    else: print("A thread já está ativa.")
 
 def stop():
     global running
