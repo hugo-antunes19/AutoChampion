@@ -30,7 +30,7 @@ def aceitarPartida():
         x, y = loc[::-1][0][0], loc[::-1][1][0]
         pyautogui.moveTo(x + (image_to_detect.shape[1] // 2), y + (image_to_detect.shape[0] // 2),duration=1)
         pyautogui.click()
-        time.sleep(2)
+        return
 
 def buscarChampion():
     global champion
@@ -46,7 +46,7 @@ def buscarChampion():
         pyautogui.click()
         time.sleep(1)
         pyautogui.typewrite(str(champion))
-        time.sleep(2)
+        return
 
 def selecionarChampion():
     championImage = cv2.imread(resource_path(f'assets/images/champions/{champion}.png'), cv2.IMREAD_GRAYSCALE)
@@ -60,7 +60,7 @@ def selecionarChampion():
         x, y = locChampion[::-1][0][0], locChampion[::-1][1][0]
         pyautogui.moveTo(x + (championImage.shape[1] // 2), y + (championImage.shape[0] // 2),duration=1)
         pyautogui.click()
-        time.sleep(2)
+        return
 
 def runa():
     global running
@@ -77,7 +77,7 @@ def runa():
         pyautogui.click()
         pyautogui.moveTo(x + 400, y - 200,duration=1)
         pyautogui.click()
-        time.sleep(2)
+        return
     
 def fechar():
     global running
@@ -91,7 +91,7 @@ def fechar():
         x, y = loc[::-1][0][0], loc[::-1][1][0]
         pyautogui.moveTo(x + (image_to_detect.shape[1] // 2), y + (image_to_detect.shape[0] // 2),duration=1)
         pyautogui.click()
-        time.sleep(2)
+        return
 
 def confirmar():
     image_to_detect = cv2.imread(resource_path('assets/images/confirm.png'), cv2.IMREAD_GRAYSCALE)
@@ -105,7 +105,7 @@ def confirmar():
         x, y = loc[::-1][0][0], loc[::-1][1][0]
         pyautogui.moveTo(x + (image_to_detect.shape[1] // 2), y + (image_to_detect.shape[0] // 2),duration=1)
         pyautogui.click()
-        time.sleep(2)
+        return
 
 def checkBan():
     global running
@@ -118,7 +118,6 @@ def checkBan():
         loc = np.where(result >= threshold)
         if len(loc[0]) > 0:
             break
-        time.sleep(2)
 
 def buscarBan():
     global running
@@ -135,7 +134,7 @@ def buscarBan():
         pyautogui.click()
         time.sleep(1)
         pyautogui.typewrite(str(ban))
-        time.sleep(2)
+        return
 
 def banirChampion():
     global running
@@ -150,7 +149,7 @@ def banirChampion():
         x, y = locChampion[::-1][0][0], locChampion[::-1][1][0]
         pyautogui.moveTo(x + (banImage.shape[1] // 2), y + (banImage.shape[0] // 2),duration=1)
         pyautogui.click()
-        time.sleep(2)
+        return
 
 def banir():
     global running
@@ -165,7 +164,7 @@ def banir():
         x, y = loc[::-1][0][0], loc[::-1][1][0]
         pyautogui.moveTo(x + (image_to_detect.shape[1] // 2), y + (image_to_detect.shape[0] // 2),duration=1)
         pyautogui.click()
-        time.sleep(2)
+        return
 
 def main_loop():
     while running:
@@ -183,22 +182,29 @@ def main_loop():
                 result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
                 loc = np.where(result >= threshold)
                 if len(loc[0]) > 0: aceitarPartida()
-            image_to_detect = cv2.imread(resource_path('assets/images/banFlag.png'), cv2.IMREAD_GRAYSCALE)
-            result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
-            loc = np.where(result >= threshold)
-            if Banimento_var.get() and len(loc[0]) > 0:
-                buscarBan()
-                banirChampion()
-                banir()
-            image_to_detect = cv2.imread(resource_path('assets/images/selecioneChampion.png'), cv2.IMREAD_GRAYSCALE)
-            result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
-            loc = np.where(result >= threshold)
-            if len(loc[0]) > 0:
-                buscarChampion()
-                selecionarChampion()
-            if runa_var.get(): runa()
-            fechar()
-            confirmar()
+            else:
+                image_to_detect = cv2.imread(resource_path('assets/images/confirm.png'), cv2.IMREAD_GRAYSCALE)
+                result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
+                loc = np.where(result >= threshold)
+                if len(loc[0]) > 0: 
+                    aceitarPartida()
+                image_to_detect = cv2.imread(resource_path('assets/images/banFlag.png'), cv2.IMREAD_GRAYSCALE)
+                result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
+                loc = np.where(result >= threshold)
+                if Banimento_var.get() and len(loc[0]) > 0:
+                    buscarBan()
+                    banirChampion()
+                    banir()
+                image_to_detect = cv2.imread(resource_path('assets/images/selecione.png'), cv2.IMREAD_GRAYSCALE)
+                result = cv2.matchTemplate(screen_gray, image_to_detect, cv2.TM_CCOEFF_NORMED)
+                loc = np.where(result >= threshold)
+                if len(loc[0]) > 0:
+                    buscarChampion()
+                    selecionarChampion()
+                    if runa_var.get(): 
+                        runa()
+                        fechar()
+                    confirmar()
         time.sleep(1)
 
 def start():
