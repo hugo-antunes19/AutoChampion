@@ -26,6 +26,7 @@ O executável possui cerca de 100MB, mas pretendo otimizar essa questão. O cód
 <div align="center">
     <img src="interface.png" alt="Interface do AutoChampion" width="200">
 </div>
+
 - Digite o nome do campeão que você quer banir
 - Clique em atualizar Banimento
 - Digite o nome do campeão que você quer jogar
@@ -33,4 +34,4 @@ O executável possui cerca de 100MB, mas pretendo otimizar essa questão. O cód
 - Quer runas automáticas? Selecione a caixa
 - Quer banimento automático? Selecione a caixa
 - Quer APENAS que o AutoChampion aceite suas partidas, ou seja, sem selecionar banimento e campeão? Selecione a caixa
-- Por fim, clique em **Iniciar**
+- Por fim, clique em Iniciar
